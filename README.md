@@ -1,47 +1,28 @@
-# monotonic-timestamp
+# mock-monotonic-timestamp
 
-Monotonically increasing timestamp.
+Deterministic variant of [monotonic-timestamp](https://github.com/dominictarr/monotonic-timestamp) meant for tests and fixtures and other use cases.
 
-<img src=https://secure.travis-ci.org/'Dominic Tarr'/monotonic-timestamp.png?branch=master>
+## Installation
 
-This is NOT a  accurate representation of the time.
-Since js only measures time as ms, if you call Date.now()
-twice quickly, it's possible to get two identical time stamps.
+This is installed in an unusual way, because this package is meant to directly replace `monotonic-timestamp`, so you should pull it from the repository, not from npm. In your **package.json**, do this:
 
-`monotonic-timestamp` fixes that problem! (crudely)
-
-## Example
-
-``` js
-var timestamp = require('monotonic-timestamp')
-
-console.log(timestamp())
-console.log(timestamp())
-console.log(timestamp())
-console.log(timestamp())
-console.log(timestamp())
-
+```diff
+   // ...
+   "dependencies": {
+     "ssb-ebt": "^5.6.7",
+     "ssb-friends": "^4.1.4",
+     "ssb-invite": "^2.1.3",
++    "monotonic-timestamp": "staltz/mock-monotonic-timestamp",
+     "ssb-lan": "^0.2.0",
+     "ssb-logging": "^1.0.0",
+     "ssb-markdown": "^6.0.4",
+   }
+   // ...
 ```
 
-subsequent calls to timestamp() are ALWAYS strictly ordered.
+## How it works
 
-## byte optimizations
-
-My precious bytes! wasted on your timestamp!
-
-pack it into a string!
-``` js
-timestamp().toString(36) 
-```
-
-if you want a constant-length string, you can use [monotonic-timestamp-base36](https://github.com/nathan7/monotonic-timestamp-base36)
-
-of course, if you are using a binary protocol, 
-it will be cheaper to use the float...
-
-##TODO
-
-syncronize network time.
+The first timestamp will be always 1438787025000 (from the inaugural SSB message `%SABuw7mOMKT5E8g6vp7ZZl8cqJfsIPPF44QpFE6p6sA=.sha256`) and every following timestamp will be +2 minutes of the previous timestamp.
 
 ## License
 
