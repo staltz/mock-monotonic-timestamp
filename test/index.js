@@ -17,3 +17,9 @@ test('subsequent timestamps are spaced by 2 minutes', (t) => {
   t.end()
 })
 
+test('can be reset with .reset()', (t) => {
+  ts.reset()
+  t.equals(ts(), INAUGURATION)
+  t.end()
+})
+
