@@ -8,8 +8,8 @@ function timestamp() {
   return returnable;
 }
 
-timestamp.reset = function reset() {
-  time = FIRST;
+timestamp.reset = function reset(first) {
+  time = first || FIRST;
 };
 
 module.exports = timestamp;

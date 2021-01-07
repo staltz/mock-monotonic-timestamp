@@ -23,3 +23,8 @@ test('can be reset with .reset()', (t) => {
   t.end()
 })
 
+test('can be reset with .reset(something)', (t) => {
+  ts.reset(1000)
+  t.equals(ts(), 1000)
+  t.end()
+})
